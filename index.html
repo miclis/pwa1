@@ -43,46 +43,6 @@
         <!-- recipes -->
         <div class="recipes container grey-text text-darken-1">
             <h6 class="center">Ninja Recipes</h6>
-            <div class="card-panel recipe white row">
-                <img src="/img/dish.png" alt="recipe thumb" />
-                <div class="recipe-details">
-                    <div class="recipe-title">Edame Noodles</div>
-                    <div class="recipe-ingredients">Edame Beans, Noodels, Garlic oil</div>
-                </div>
-                <div class="recipe-delete">
-                    <i class="material-icons">delete_outline</i>
-                </div>
-            </div>
-            <div class="card-panel recipe white row">
-                <img src="/img/dish.png" alt="recipe thumb" />
-                <div class="recipe-details">
-                    <div class="recipe-title">Edame Noodles</div>
-                    <div class="recipe-ingredients">Edame Beans, Noodels, Garlic oil</div>
-                </div>
-                <div class="recipe-delete">
-                    <i class="material-icons">delete_outline</i>
-                </div>
-            </div>
-            <div class="card-panel recipe white row">
-                <img src="/img/dish.png" alt="recipe thumb" />
-                <div class="recipe-details">
-                    <div class="recipe-title">Edame Noodles</div>
-                    <div class="recipe-ingredients">Edame Beans, Noodels, Garlic oil</div>
-                </div>
-                <div class="recipe-delete">
-                    <i class="material-icons">delete_outline</i>
-                </div>
-            </div>
-            <div class="card-panel recipe white row">
-                <img src="/img/dish.png" alt="recipe thumb" />
-                <div class="recipe-details">
-                    <div class="recipe-title">Edame Noodles</div>
-                    <div class="recipe-ingredients">Edame Beans, Noodels, Garlic oil</div>
-                </div>
-                <div class="recipe-delete">
-                    <i class="material-icons">delete_outline</i>
-                </div>
-            </div>
         </div>
 
         <div class="center">
@@ -110,7 +70,27 @@
             </form>
         </div>
 
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-firestore.js"></script>
+
+        <script>
+            // Your web app's Firebase configuration
+            var firebaseConfig = {
+                apiKey: 'AIzaSyDSIHCdMRM9n_3DhRETnMv74tqlu2HMphw',
+                authDomain: 'food-ninja-test.firebaseapp.com',
+                databaseURL: 'https://food-ninja-test.firebaseio.com',
+                projectId: 'food-ninja-test',
+                storageBucket: 'food-ninja-test.appspot.com',
+                messagingSenderId: '609909778045',
+                appId: '1:609909778045:web:00b9f696f12777c9787314',
+            };
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+            const db = firebase.firestore();
+        </script>
         <script src="/js/app.js"></script>
+        <script src="/js/db.js"></script>
         <script src="/js/ui.js"></script>
     </body>
 </html>

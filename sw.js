@@ -1,10 +1,11 @@
-const staticCacheName = 'site-static-v2';
-const dynamicCacheName = 'site-dynamic-v1';
+const staticCacheName = 'site-static-v3';
+const dynamicCacheName = 'site-dynamic-v2';
 const assets = [
     '/',
     '/index.html',
     '/js/app.js',
     '/js/ui.js',
+    '/js/db.js',
     '/js/materialize.min.js',
     '/css/styles.css',
     '/css/materialize.min.css',
@@ -53,28 +54,30 @@ self.addEventListener('activate', (evt) => {
 
 // fetch event
 self.addEventListener('fetch', (evt) => {
-    //console.log('fetch event', evt);
-    evt.respondWith(
-        caches
-            .match(evt.request)
-            .then((cacheRes) => {
-                return (
-                    cacheRes ||
-                    fetch(evt.request).then((fetchRes) => {
-                        return caches.open(dynamicCacheName).then((cache) => {
-                            cache.put(evt.request.url, fetchRes.clone()).then(
-                                // check cached items size
-                                limitCacheSize(dynamicCacheName, 3)
-                            );
-                            return fetchRes;
-                        });
-                    })
-                );
-            })
-            .catch(() => {
-                if (evt.request.url.indexOf('.html') > -1) {
-                    return caches.match('/pages/fallback.html');
-                }
-            })
-    );
+    // is not data from the database
+    if (!evt.request.url.includes('firestore.googleapis.com')) {
+        evt.respondWith(
+            caches
+                .match(evt.request)
+                .then((cacheRes) => {
+                    return (
+                        cacheRes ||
+                        fetch(evt.request).then((fetchRes) => {
+                            return caches.open(dynamicCacheName).then((cache) => {
+                                cache.put(evt.request.url, fetchRes.clone()).then(
+                                    // check cached items size
+                                    limitCacheSize(dynamicCacheName, 15)
+                                );
+                                return fetchRes;
+                            });
+                        })
+                    );
+                })
+                .catch(() => {
+                    if (evt.request.url.indexOf('.html') > -1) {
+                        return caches.match('/pages/fallback.html');
+                    }
+                })
+        );
+    }
 });
